@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+# Replace Mac OS 's sed to gnu-sed.
+# Excute `brew install gnu-sed` first.
+alias sed=gsed
+

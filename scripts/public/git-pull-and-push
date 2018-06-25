@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+git pull $1 $2 &&\
+git push $1 $2

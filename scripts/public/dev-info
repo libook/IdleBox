@@ -1,0 +1,14 @@
+#!/bin/zsh
+
+echo "Base:"
+echo "├ Directory: `pwd`"
+echo "└ Node Version: `node --version`"
+
+echo "Git:"
+echo "├ Branch: `git rev-parse --abbrev-ref HEAD 2> /dev/null`"
+echo "├ Hash: `git rev-parse HEAD 2> /dev/null`"
+echo "├ Date: `git show 2> /dev/null | grep Date | awk -F \"   \" '{print $2}'`"
+echo "└ Tag: `git tag -l --sort=v:refname 2> /dev/null | tail -n 1`"
+
+echo "Package:"
+echo "└ Version: `cat package.json 2> /dev/null | grep version | awk -F \\" '{print $4}'`"

@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+# $1 is nvm release line to update. node, lts/*...
+# $2 is nvm release line that packages from. node, lts/*...
+
+# Try to load nvm.
+. "$NVM_DIR/nvm.sh"
+
+nvm install $1 --reinstall-packages-from=$2 &&
+nvm use $1 &&
+npm install -g npm &&
+npm upgrade -g

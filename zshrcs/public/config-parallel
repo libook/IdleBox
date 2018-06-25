@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+. `which env_parallel.zsh`

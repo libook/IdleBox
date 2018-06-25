@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+# GEM
+export PATH=$PATH:$IDLEBOX_GEM_BIN_DIR

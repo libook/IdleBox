@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+# alias to nw
+alias nw=$IDLEBOX_NWJS

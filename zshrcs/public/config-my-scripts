@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+# Scripts of mine
+export PATH=$PATH:$IDLEBOX/scripts/public
+export PATH=$PATH:$IDLEBOX/scripts/private

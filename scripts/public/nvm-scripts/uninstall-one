@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+# $1 is node version.
+
+# Try to load nvm.
+. "$NVM_DIR/nvm.sh"
+
+nvm uninstall $1

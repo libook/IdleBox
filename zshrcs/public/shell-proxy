@@ -1,0 +1,16 @@
+#!/bin/zsh
+
+# Shell proxy
+function shell-proxy(){
+  if [ "$1" = "on" ]; then
+    echo "Turning on shell proxy."
+    export ALL_PROXY=$IDLEBOX_SHELL_PROXY_SERVER
+  elif [ "$1" = "off" ]; then
+    echo "Turning off shell proxy."
+    unset ALL_PROXY
+  else
+    echo "Invalid param. Please input 'shell-proxy on' or 'shell-proxy off' to switch shell proxy."
+  fi
+
+  curl ip.cn
+}

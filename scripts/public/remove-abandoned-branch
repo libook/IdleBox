@@ -1,0 +1,25 @@
+#!/bin/zsh
+
+git fetch --prune
+
+echo "*******"
+echo "Branches to remove:\n"
+
+git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}'
+git branch -vv | grep -v '\[origin/' | awk '{print $1}'
+
+echo "\nThis will remove all branches that doesn't exist on remote!"
+while true; do
+    read "yn?Continue anyway? Input 'Yes' to do this. "
+    case $yn in
+        Yes* )
+            git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -d
+            git branch -vv | grep -v '\[origin/' | awk '{print $1}' | xargs git branch -d
+            break
+            ;;
+        * )
+            echo "Not 'Yes'. Canceled."
+            exit
+            ;;
+    esac
+done

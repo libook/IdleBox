@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+ZSHRCS=$HOME/.idlebox/zshrcs
+
+# Android Platform Tools
+export PATH=$PATH:$ZSHRCS_ANDROID_PLATFORM_TOOLS_DIR

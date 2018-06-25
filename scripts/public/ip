@@ -1,0 +1,3 @@
+#!/bin/zsh
+# Get my IP
+ifconfig|grep "inet "|awk '{print $2}'

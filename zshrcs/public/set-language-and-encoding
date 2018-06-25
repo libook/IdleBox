@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+export LC_ALL=$IDLEBOX_LANGUAGE_AND_ENCODING
