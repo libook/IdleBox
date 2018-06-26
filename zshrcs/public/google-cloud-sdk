@@ -1,7 +1,13 @@
 #!/bin/zsh
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f $IDLEBOX_GOOGLE_CLOUD_SDK_DIR'/path.zsh.inc' ]; then source $IDLEBOX_GOOGLE_CLOUD_SDK_DIR'/path.zsh.inc'; fi
+if [[ ! -z $IDLEBOX_GOOGLE_CLOUD_SDK_DIR ]];then
+  # The next line updates PATH for the Google Cloud SDK.
+  if [ -f $IDLEBOX_GOOGLE_CLOUD_SDK_DIR'/path.zsh.inc' ]; then
+    source $IDLEBOX_GOOGLE_CLOUD_SDK_DIR'/path.zsh.inc'
+  fi
 
-# The next line enables shell command completion for gcloud.
-if [ -f $IDLEBOX_GOOGLE_CLOUD_SDK_DIR'/completion.zsh.inc' ]; then source $IDLEBOX_GOOGLE_CLOUD_SDK_DIR'/completion.zsh.inc'; fi
+  # The next line enables shell command completion for gcloud.
+  if [ -f $IDLEBOX_GOOGLE_CLOUD_SDK_DIR'/completion.zsh.inc' ]; then
+    source $IDLEBOX_GOOGLE_CLOUD_SDK_DIR'/completion.zsh.inc'
+  fi
+fi

@@ -1,4 +1,7 @@
 #!/bin/zsh
 
 # alias to nw
-alias nw=$IDLEBOX_NWJS
+
+if [[ ! -z $IDLEBOX_NWJS ]];then
+  alias nw=$IDLEBOX_NWJS
+fi

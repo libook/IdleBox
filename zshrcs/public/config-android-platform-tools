@@ -1,6 +1,9 @@
 #!/bin/zsh
 
+# Android Platform Tools
+
 ZSHRCS=$HOME/.idlebox/zshrcs
 
-# Android Platform Tools
-export PATH=$PATH:$ZSHRCS_ANDROID_PLATFORM_TOOLS_DIR
+if [[ ! -z $PATH:$ZSHRCS_ANDROID_PLATFORM_TOOLS_DIR ]];then
+  export PATH=$PATH:$ZSHRCS_ANDROID_PLATFORM_TOOLS_DIR
+fi

@@ -1,5 +1,8 @@
 #!/bin/zsh
 
 # Bin of go
-export PATH=$PATH:$IDLEBOX_GO_DIR/bin
-export GOPATH=$IDLEBOX_GO_DIR
+
+if [[ ! -z $IDLEBOX_GO_DIR ]];then
+  export PATH=$PATH:$IDLEBOX_GO_DIR/bin
+  export GOPATH=$IDLEBOX_GO_DIR
+fi

@@ -1,4 +1,7 @@
 #!/bin/zsh
 
 # GEM
-export PATH=$PATH:$IDLEBOX_GEM_BIN_DIR
+
+if [[ ! -z $IDLEBOX_GEM_BIN_DIR ]];then
+  export PATH=$PATH:$IDLEBOX_GEM_BIN_DIR
+fi
