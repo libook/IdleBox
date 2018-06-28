@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+cd $HOME
+git clone https://github.com/libook/IdleBox.git .idlebox
+mv .zshrc .zshrc.backup
+ln -s $HOME/.idlebox/zshrc $HOME/.zshrc
