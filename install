@@ -2,5 +2,7 @@
 
 cd $HOME
 git clone https://github.com/libook/IdleBox.git .idlebox
-mv .zshrc .zshrc.backup
+if [ -f '.zshrc' ];then
+  mv .zshrc .zshrc.backup
+fi
 ln -s $HOME/.idlebox/zshrc $HOME/.zshrc
