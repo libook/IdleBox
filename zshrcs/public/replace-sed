@@ -1,7 +1,0 @@
-#!/bin/zsh
-
-# Replace Mac OS 's sed to gnu-sed.
-# Excute `brew install gnu-sed` first.
-if [[ ! -z `whereis gsed | awk '{print $2}'` ]];then
-  alias sed=gsed
-fi
