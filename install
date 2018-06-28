@@ -2,6 +2,9 @@
 
 cd $HOME
 git clone https://github.com/libook/IdleBox.git .idlebox
+if [ ! -f '.idlebox/config' ];then
+  cp .idlebox/config.example .idlebox/config
+fi
 if [ -f '.zshrc' ];then
   mv .zshrc .zshrc.backup
 fi
