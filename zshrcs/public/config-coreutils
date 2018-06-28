@@ -1,0 +1,13 @@
+#!/bin/zsh
+
+# For Mac OS.
+# Use GNU commands as default.
+# Brew install coreutils.
+
+if [ -f '/usr/local/opt/coreutils/libexec/gnubin/uname' ]; then
+  # Use these commands with their normal names, add a "gnubin" directory to PATH.
+  export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+
+  # Access their man pages with normal names, add the "gnuman" directory MANPATH.
+  export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+fi
