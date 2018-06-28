@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+# Download latest release from github.
+# $1 is people_or_organization_name/project_name.
+# For example: github-latest-release-download shadowsocks/shadowsocks-android
+
+for url in `curl --silent https://api.github.com/repos/$1/releases/latest | awk '/browser_download_url/ { print $2 }' | sed 's/"//g'`
+do
+    echo $url
+    curl -LOk $url
+done
+
