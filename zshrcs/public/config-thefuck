@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+if [[ ! -z `whereis thefuck | awk '{print $2}'` ]];then
+  eval $(thefuck --alias)
+fi
+
