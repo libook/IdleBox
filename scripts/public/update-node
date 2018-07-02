@@ -9,9 +9,6 @@ SCRIPT_PATH=$IDLEBOX/scripts/public/nvm-scripts
 # Update lts.
 $SCRIPT_PATH/update-one lts/* lts/*
 
-# For Mac OS, alias sed to gnu-sed.
-alias sed=gsed
-
 nvm use lts/*
 # Uninstall all versions except lts.
 nvm ls | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" | grep -v '\->' | xargs -I VERSION $SCRIPT_PATH/uninstall-one VERSION
