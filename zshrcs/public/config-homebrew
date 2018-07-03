@@ -4,4 +4,7 @@
 
 if [[ ! -z $IDLEBOX_HOMEBREW_GITHUB_API_TOKEN ]];then
   export HOMEBREW_GITHUB_API_TOKEN=$IDLEBOX_HOMEBREW_GITHUB_API_TOKEN
+
+  # USTC Bottles mirror
+  export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 fi
