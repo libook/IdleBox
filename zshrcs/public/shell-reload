@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+shell-reload(){
+  source ~/.zshrc
+}
+
