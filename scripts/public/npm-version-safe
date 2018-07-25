@@ -1,0 +1,21 @@
+#!/usr/bin/env zsh
+
+. "$NVM_DIR/nvm.sh"
+
+if [[ $1 == '' ]] then
+  npm version -h | sed -n 1p;
+  exit 1;
+fi
+
+gitVersion=`git tag -l --sort=v:refname 2> /dev/null | tail -n 1`
+npmVersion='v'`cat package.json 2> /dev/null | grep '"version"' | awk -F \\" '{print $4}'`
+
+echo 'Git version: '$gitVersion
+echo 'Npm version: '$npmVersion
+
+if [[ $gitVersion == $npmVersion ]] then
+  npm version $1;
+else
+  echo "Failed. Git version is not the same as npm version. Please check.";
+  exit 1;
+fi
