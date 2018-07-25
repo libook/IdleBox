@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 # Batch ping servers from a list.
 # $1 is the server list file.

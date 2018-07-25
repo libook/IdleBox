@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 # Scripts of mine
 export PATH=$PATH:$IDLEBOX/scripts/public

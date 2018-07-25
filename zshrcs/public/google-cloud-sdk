@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 if [[ ! -z $IDLEBOX_GOOGLE_CLOUD_SDK_DIR ]];then
   # The next line updates PATH for the Google Cloud SDK.

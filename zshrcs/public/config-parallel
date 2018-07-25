@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 if [[ ! -z `whereis env_parallel.zsh | awk '{print $2}'` ]];then
   . `which env_parallel.zsh`

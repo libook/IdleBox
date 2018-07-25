@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 # For Mac OS.
 # Use GNU commands as default.
