@@ -2,8 +2,6 @@
 
 # This will compare git version and npm version before updating versions.
 
-. "$NVM_DIR/nvm.sh"
-
 if [[ $1 == '' ]] then
   npm version -h | sed -n 1p;
   exit 1;
