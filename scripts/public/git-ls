@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+# List files and directories with last commit person's name.
+
+git_path=$(which git)
+
+for path in ./*;
+do
+  person_name=$($git_path log -1 --pretty=format:'%an' $path)
+  echo "$path\t$person_name"
+done
