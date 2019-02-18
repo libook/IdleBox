@@ -1,7 +1,9 @@
 # IdleBox
-My shell tool kit.
+My shell toolkit.
 
 ## Installation
+
+Make sure that you have [zsh](https://en.wikipedia.org/wiki/Z_shell) and [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) installed.
 
 ### with curl
 
@@ -14,6 +16,8 @@ zsh -c "$(curl -fsSL https://raw.githubusercontent.com/libook/IdleBox/master/ins
 ```shell
 zsh -c "$(wget https://raw.githubusercontent.com/libook/IdleBox/master/install -O -)"
 ```
+
+### Change configuration in ~/.idlebox/config
 
 ## Directory Structure
 
