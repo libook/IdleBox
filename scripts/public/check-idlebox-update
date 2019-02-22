@@ -1,0 +1,29 @@
+#!/usr/bin/env zsh
+
+# This will check for update everyday.
+
+LOCK_PATH=/tmp/idlebox-update.lock
+DATE=`date +%Y%m%d`
+
+writeLock(){
+  echo $DATE > $LOCK_PATH;
+}
+
+isNotToday(){
+  if [ ! -f $LOCK_PATH ]; then
+    return 0;
+  else
+    if [ "`cat $LOCK_PATH`" = "$DATE" ]; then
+      return 0;
+    else
+      return 1;
+    fi
+  fi
+}
+
+# Save the day of the month
+if [ ! -f $LOCK_PATH ]; then
+  echo $(isNotToday)
+  writeLock
+  echo $(isNotToday)
+fi

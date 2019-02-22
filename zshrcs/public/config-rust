@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+# Bin of rust
+
+if [[ ! -z $IDLEBOX_RUST_DIR ]];then
+  export PATH=$PATH:$IDLEBOX_RUST_DIR/bin
+fi
