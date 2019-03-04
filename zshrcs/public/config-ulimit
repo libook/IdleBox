@@ -1,4 +1,12 @@
 #!/usr/bin/env zsh
 
-ulimit -n 65535
+# Set open file limit.
 
+case `myos` in
+    Linux*)     ulimit -n 65535;;
+    # https://support.apple.com/zh-cn/HT3854
+    Mac*)       ulimit -n `sysctl -a | grep hw.memsize | awk '{print $2/1024/1024/1024/8*2500}'`;;
+    Cygwin*)    ulimit -n 65535;;
+    MinGw*)     ulimit -n 65535;;
+#    *)
+esac
