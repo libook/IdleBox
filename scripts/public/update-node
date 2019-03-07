@@ -7,7 +7,7 @@
 SCRIPT_PATH=$IDLEBOX/scripts/public/nvm-scripts
 
 # Update lts.
-$SCRIPT_PATH/update-one lts/* lts/*
+$SCRIPT_PATH/update-one lts/* current
 
 nvm use lts/*
 nvm alias default lts/*
