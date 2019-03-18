@@ -9,3 +9,6 @@ if [ -f '.zshrc' ];then
   mv .zshrc .zshrc.backup
 fi
 ln -s $HOME/.idlebox/zshrc $HOME/.zshrc
+
+source $HOME/.zshrc
+

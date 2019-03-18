@@ -3,3 +3,5 @@
 cd $IDLEBOX
 git pull
 
+source $HOME/.zshrc
+
