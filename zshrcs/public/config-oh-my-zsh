@@ -52,3 +52,7 @@ if [ -f $ZSH/oh-my-zsh.sh ];then
 
   source $ZSH/oh-my-zsh.sh
 fi
+
+# Show username and hostname.
+export PROMPT="%{$fg_bold[white]%}%n@%m ${PROMPT}"
+
