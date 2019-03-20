@@ -8,7 +8,7 @@ if [ -f $ZSH/oh-my-zsh.sh ];then
   # Look in ~/.oh-my-zsh/themes/
   # Optionally, if you set this to "random", it'll load a random theme each
   # time that oh-my-zsh is loaded.
-  ZSH_THEME="robbyrussell"
+  ZSH_THEME="aussiegeek"
 
   # Uncomment the following line to use case-sensitive completion.
   # CASE_SENSITIVE="true"
@@ -52,7 +52,4 @@ if [ -f $ZSH/oh-my-zsh.sh ];then
 
   source $ZSH/oh-my-zsh.sh
 fi
-
-# Show username and hostname.
-export PROMPT="%{$fg_bold[white]%}%n@%m ${PROMPT}"
 
