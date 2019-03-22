@@ -1,24 +1,28 @@
 #!/usr/bin/env zsh
 
-declare -a NODE_GLOBALS=(`find ~/.nvm/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
+if [ -d "$HOME/.nvm" ]; then
 
-NODE_GLOBALS+=("node")
-NODE_GLOBALS+=("nvm")
+    declare -a NODE_GLOBALS=(`find ~/.nvm/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
 
-load_nvm () {
-    # Mirrors of nvm
-    export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node
-    export NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node
-    export NVM_IOJS_ORG_MIRROR=https://npm.taobao.org/mirrors/iojs
+    NODE_GLOBALS+=("node")
+    NODE_GLOBALS+=("nvm")
 
-    # Let NVM create ~/.nvm/current as a soft link to current node version.
-    NVM_SYMLINK_CURRENT=true
+    load_nvm () {
+        # Mirrors of nvm
+        export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node
+        export NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node
+        export NVM_IOJS_ORG_MIRROR=https://npm.taobao.org/mirrors/iojs
 
-    NVM_DIR=~/.nvm
-    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-}
+        # Let NVM create ~/.nvm/current as a soft link to current node version.
+        NVM_SYMLINK_CURRENT=true
 
-for cmd in "${NODE_GLOBALS[@]}"; do
-    eval "${cmd}(){ unset -f ${NODE_GLOBALS}; load_nvm; ${cmd} \$@ }"
-done
+        NVM_DIR=$HOME/.nvm
+        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+    }
+
+    for cmd in "${NODE_GLOBALS[@]}"; do
+        eval "${cmd}(){ unset -f ${NODE_GLOBALS}; load_nvm; ${cmd} \$@ }"
+    done
+
+fi
 
