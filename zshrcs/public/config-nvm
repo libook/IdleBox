@@ -2,7 +2,9 @@
 
 if [ -d "$HOME/.nvm" ]; then
 
-    declare -a NODE_GLOBALS=(`find ~/.nvm/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
+    if [ -d "$HOME/.nvm/versions/node" ]; then
+        declare -a NODE_GLOBALS=(`find ~/.nvm/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
+    fi
 
     NODE_GLOBALS+=("node")
     NODE_GLOBALS+=("nvm")
