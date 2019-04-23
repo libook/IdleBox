@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env zsh -i
 
 # Try to load nvm.
 . "$NVM_DIR/nvm.sh"
