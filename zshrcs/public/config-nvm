@@ -7,6 +7,10 @@ if [ -d "$HOME/.nvm" ]; then
         declare -a NODE_GLOBALS=(`find $NVM_DIR/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
     fi
 
+    if [ -d "$NVM_DIR/current/bin" ]; then
+        export PATH=$PATH:$NVM_DIR/current/bin
+    fi
+
     NODE_GLOBALS+=("node")
     NODE_GLOBALS+=("nvm")
 
