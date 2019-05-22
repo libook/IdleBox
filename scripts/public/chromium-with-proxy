@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+chromium --proxy-server="$IDLEBOX_SHELL_PROXY_SERVER"
+
