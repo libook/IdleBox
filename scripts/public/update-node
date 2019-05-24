@@ -18,5 +18,6 @@ else
   # Install latest.
   $SCRIPT_PATH/update-one node "lts/*"
 
-  nvm alias default node &&
+  nvm alias default node
+  . "$NVM_DIR/nvm.sh"
 fi
