@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+# Docker shortcuts
+
+# List all images.
+alias dils="docker image list -a"
+
+# Remove image.
+alias dirm="docker image rm"
+
+# List all containers.
+alias dcls="docker container list -a"
+
+# Remove container.
+alias dcrm="docker container rm"
