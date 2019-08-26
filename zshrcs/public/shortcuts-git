@@ -6,3 +6,5 @@ alias gpwt="git push --tags && git push"
 # Git push with same branch name. Require $IDLEBOX/scripts/public/git-push-to-same-branch.
 alias gpsb="git-push-to-same-branch"
 
+# Git track branch from origin with the same name.
+alias gtsb="git-track-same-branch"
