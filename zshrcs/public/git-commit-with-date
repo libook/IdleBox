@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+# Git commit with date e.g.:
+# git-commit-with-date "2019-09-29T08:12:04.020+0800" -m "commit at past"
+function git-commit-with-date(){
+  for ((i = 2; i <= ${#@}; i++)); do
+    argsRem[i-1]=${@[i]}
+  done
+  GIT_COMMITTER_DATE="$1" git commit --date "$1" ${argsRem[1,${#@}-1]}
+}
