@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-# git-clone-all SEARCH TARGET_DIRECTORY
+# git-clone-all "SEARCH" TARGET_DIRECTORY "OTHER_ARGUMENTS"
 
 # Use this API https://developer.github.com/v3/search/#search-repositories
 # Use the same search syntax as on the website https://help.github.com/en/articles/searching-for-repositories
@@ -15,11 +15,9 @@ while true; do
     read "yn?Do you want to clone these repositories to $2 ? Input 'Yes' to do this. "
     case $yn in
         Yes* )
-            if [ -z "$2" ]
-              then
-                cd $2
-            fi
-            echo $URLS | xargs -I URL git clone URL
+	    mkdir -p $2
+	    cd $2
+            echo $URLS | xargs -I URL git clone URL $3
             break
             ;;
         * )
