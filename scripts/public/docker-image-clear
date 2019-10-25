@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+# Clear all unused images
+docker rmi -f $(docker images | grep "<none>" | awk "{print \$3}")
