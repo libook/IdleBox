@@ -8,7 +8,7 @@ if [[ $1 == '' ]] then
 fi
 
 gitVersion=`git tag -l --sort=v:refname 2> /dev/null | tail -n 1`
-npmVersion='v'`cat package.json 2> /dev/null | grep '"version"' | awk -F \\" '{print $4}'`
+npmVersion='v'`node -e "console.log(require('./package.json').version)" 2> /dev/null`
 
 echo 'Git version: '$gitVersion
 echo 'Npm version: '$npmVersion
