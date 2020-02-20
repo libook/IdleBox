@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+# Git only clone latest commit.
+# If you just need the latest version of source code.
+# And don't need version-control-system data.
+# e.g.:
+# git-clone-latest-commit https://github.com/libook/IdleBox.git
+alias git-clone-latest-commit="git clone --depth=1 "
