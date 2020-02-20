@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+# Get the latest version hash before a date on a branch.
+# e.g.:
+# git-get-commit-hash-before master "2020-01-01 00:00"
+
+echo `git rev-list -n 1 --first-parent --before="$2" "$1"`
