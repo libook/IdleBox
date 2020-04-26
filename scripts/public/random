@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+# Generate a random string with a length. e.g. `random 10`
+######
+
+LENGTH=${1:=6}
+
+head /dev/urandom | tr -dc A-Za-z0-9 | head -c $LENGTH; echo ''
+
