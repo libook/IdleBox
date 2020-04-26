@@ -28,6 +28,10 @@ cd ./word/media/
 /Applications/LibreOffice.app/Contents/MacOS/soffice --headless --convert-to png *.emf
 
 mkdir ../../images
+
+# Copy images. https://support.office.com/en-us/article/graphic-file-types-you-can-insert-and-save-dad53574-3384-4ced-b472-348d37c326a7 Only support these formats for now:
+find ./ -type f \( -iname \*.jpg -o -iname \*.jpeg -o -iname \*.png -o -iname \*.bmp -o -iname \*.gif \) -exec cp "{}" ../../images/ \;
+
 find ./ -name "*.png" -exec convert {} -trim ../../images/{} \;
 cd ../../images
 
