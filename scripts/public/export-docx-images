@@ -1,0 +1,37 @@
+#!/usr/bin/env zsh
+
+# This script can export all images in a docx file.
+# Only works on MacOS, for now.
+# Require LibreOffice and ImageMagick.
+######
+
+
+# Define tmp directory name:
+TMP_DIRECTORY='/tmp/export-docx-images-'`random`
+
+# Create tmp directory:
+mkdir $TMP_DIRECTORY
+
+FILE_NAME=`echo $1 |awk -F '/' '{print $NF}'|sed -e 's/\..*$//'`
+
+# Copy file and change extension name to zip:
+cp $1 $TMP_DIRECTORY/$FILE_NAME.zip
+
+cd $TMP_DIRECTORY/
+
+# Uncompress:
+unzip ./$FILE_NAME.zip
+
+cd ./word/media/
+
+# Convert emf format to png:
+/Applications/LibreOffice.app/Contents/MacOS/soffice --headless --convert-to png *.emf
+
+mkdir ../../images
+find ./ -name "*.png" -exec convert {} -trim ../../images/{} \;
+cd ../../images
+
+echo 'Successful! Please check '$PWD
+
+open .
+
