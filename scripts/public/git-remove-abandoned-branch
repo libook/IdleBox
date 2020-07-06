@@ -3,7 +3,7 @@
 git fetch --prune
 
 echo "*******"
-echo "Branches to remove:\n"
+echo "Branches to be removed:\n"
 
 git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}'
 git branch -vv | grep -v '\[origin/' | awk '{print $1}'
