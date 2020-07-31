@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+# Launch an HTTP server at current directory.
+# e.g. Start an HTTP server from current directory at port 8000: http-server
+# e.g. Start an HTTP server from /tmp directory at port 8080: http-server 8080 --directory /tmp
+
+PYTHON_MAJOR_VERSION=$(python --version 2>&1 | awk '{print $2}' | awk -F '.' '{print $1}')
+
+if (command -v "python3" >/dev/null) || (($PYTHON_MAJOR_VERSION == 3)); then
+  echo "Using Python v3 with http.server module."
+  echo -e "Arguments can be found in: https://docs.python.org/3/library/http.server.html"
+  python3 -m http.server "$@"
+elif (command -v "python2" >/dev/null) || (($PYTHON_MAJOR_VERSION == 2)); then
+  echo "Using Python v2 with SimpleHTTPServer module."
+  echo "Arguments can be found in: https://docs.python.org/2/library/simplehttpserver.html#module-SimpleHTTPServer"
+  python2 -m SimpleHTTPServer "$@"
+else
+  echo "Python is not found!"
+fi
