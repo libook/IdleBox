@@ -8,7 +8,7 @@ update-idlebox
 echo "Updating system..."
 # -- MacOS
 if command -v "brew" >/dev/null; then
-  brew update && brew upgrade && brew cask upgrade --greedy
+  brew update && brew upgrade && brew upgrade --cask --greedy
 # -- Linux
 # --- Arch based
 elif command -v "yay" >/dev/null; then
