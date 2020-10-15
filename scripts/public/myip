@@ -1,17 +1,24 @@
 #!/usr/bin/env zsh
 # Get my IP
 
+# IP within LAN
 if command -v "ifconfig" >/dev/null; then
   # Use ifconfig
   ifconfig \
   | grep "inet " \
-  | awk '{print $2}'
+  | awk '{print $2}' \
+  | grep -v 127.0.0.1
 elif command -v "ip" >/dev/null; then
   # Use ip
   ip addr show \
   | grep "inet " \
   | awk '{print $2}' \
-  | awk -F "/" '{print $1}'
+  | awk -F "/" '{print $1}' \
+  | grep -v 127.0.0.1
 else
   echo "Need command 'ifconfig' or 'ip'."
 fi
+
+# IP on internet
+curl ip.cip.cc
+
