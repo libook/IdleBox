@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
 
+# - Oh My Zsh
+echo "Updating Oh My Zsh..."
+zsh $ZSH/tools/upgrade.sh
+
 # - Idlebox
 echo "Updating Idlebox..."
 update-idlebox
