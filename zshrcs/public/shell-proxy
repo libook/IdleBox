@@ -12,5 +12,5 @@ function shell-proxy(){
     echo "Invalid param. Please input 'shell-proxy on' or 'shell-proxy off' to switch shell proxy."
   fi
 
-  curl ip.cn
+  curl cip.cc
 }
