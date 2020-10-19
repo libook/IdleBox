@@ -5,16 +5,17 @@
 # For example: github-latest-release-download videolan/vlc
 
 # If $1 is a GitHub url:
-REPO_NAME=$(echo "$1" | grep "github.com" | awk -F "github.com" '{print $2}' | awk -F / '{print $2"/"$3}')
-if [[ -z $REPO_NAME ]];then
-  REPO_NAME=$1
+repo_name=$(echo "$1" | grep "github.com" | awk -F "github.com" '{print $2}' | awk -F / '{print $2"/"$3}')
+if [[ -z $repo_name ]];then
+  repo_name=$1
 fi
 
 # Download
-if [[ ! -z $REPO_NAME ]];then
-  for url in `curl --silent https://api.github.com/repos/$REPO_NAME/releases/latest | awk '/browser_download_url/ { print $2 }' | sed 's/"//g'`
-  do
-      echo $url
-      curl -LOC - $url
-  done
+if [[ ! -z $repo_name ]];then
+  url_list=(`curl --silent https://api.github.com/repos/$repo_name/releases/latest | awk '/browser_download_url/ { print $2 }' | sed 's/"//g'`)
+  PS3="Input number and press ENTER; or exit with Ctrl+c:"
+  select url ($url_list) {
+    echo $url
+    curl -LOC - $url
+  }
 fi
