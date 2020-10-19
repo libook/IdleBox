@@ -1,12 +1,20 @@
 #!/usr/bin/env zsh
 
-# Download latest release from github.
+# Download latest release from GitHub.
 # $1 is people_or_organization_name/project_name.
-# For example: github-latest-release-download shadowsocks/shadowsocks-android
+# For example: github-latest-release-download videolan/vlc
 
-for url in `curl --silent https://api.github.com/repos/$1/releases/latest | awk '/browser_download_url/ { print $2 }' | sed 's/"//g'`
-do
-    echo $url
-    curl -LOk $url
-done
+# If $1 is a GitHub url:
+REPO_NAME=$(echo "$1" | grep "github.com" | awk -F "github.com" '{print $2}' | awk -F / '{print $2"/"$3}')
+if [[ -z $REPO_NAME ]];then
+  REPO_NAME=$1
+fi
 
+# Download
+if [[ ! -z $REPO_NAME ]];then
+  for url in `curl --silent https://api.github.com/repos/$REPO_NAME/releases/latest | awk '/browser_download_url/ { print $2 }' | sed 's/"//g'`
+  do
+      echo $url
+      curl -LOC - $url
+  done
+fi
