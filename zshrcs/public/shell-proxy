@@ -4,10 +4,33 @@
 function shell-proxy(){
   if [ "$1" = "on" ]; then
     echo "Turning on shell proxy."
-    export ALL_PROXY=$IDLEBOX_SHELL_PROXY_SERVER
+    if [[ ! -z $IDLEBOX_SHELL_PROXY_SERVER_ALL ]];then
+      export all_proxy=$IDLEBOX_SHELL_PROXY_SERVER_ALL
+      export ALL_PROXY=$IDLEBOX_SHELL_PROXY_SERVER_ALL
+      echo "Proxy \"ALL\" with $IDLEBOX_SHELL_PROXY_SERVER_ALL"
+    fi
+    if [[ ! -z $IDLEBOX_SHELL_PROXY_SERVER_HTTP ]];then
+      export http_proxy=$IDLEBOX_SHELL_PROXY_SERVER_HTTP
+      export HTTP_PROXY=$IDLEBOX_SHELL_PROXY_SERVER_HTTP
+      echo "Proxy \"HTTP\" with $IDLEBOX_SHELL_PROXY_SERVER_HTTP"
+    fi
+    if [[ ! -z $IDLEBOX_SHELL_PROXY_SERVER_HTTPS ]];then
+      export https_proxy=$IDLEBOX_SHELL_PROXY_SERVER_HTTPS
+      export HTTPS_PROXY=$IDLEBOX_SHELL_PROXY_SERVER_HTTPS
+      echo "Proxy \"HTTPS\" with $IDLEBOX_SHELL_PROXY_SERVER_HTTPS"
+    fi
+    export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+    export NO_PROXY="localhost,127.0.0.1,localaddress,.localdomain.com"
   elif [ "$1" = "off" ]; then
     echo "Turning off shell proxy."
+    unset all_proxy
     unset ALL_PROXY
+    unset http_proxy
+    unset HTTP_PROXY
+    unset https_proxy
+    unset HTTPS_PROXY
+    unset no_proxy
+    unset NO_PROXY
   else
     echo "Invalid param. Please input 'shell-proxy on' or 'shell-proxy off' to switch shell proxy."
   fi
