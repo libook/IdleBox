@@ -32,7 +32,7 @@ elif command -v "yum" >/dev/null; then
 fi
 
 # - Node.js
-if command -v "nvm" >/dev/null; then
+if [[ ! -z $NVM_DIR  ]]; then
   echo "Updating Node.js..."
   update-node
 fi
