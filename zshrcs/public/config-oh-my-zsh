@@ -48,7 +48,10 @@ if [ -f $ZSH/oh-my-zsh.sh ];then
   # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
   # Example format: plugins=(rails git textmate ruby lighthouse)
   # Add wisely, as too many plugins slow down shell startup.
-  plugins=$IDLEBOX_PLUGINS
+  IFS_temp=$IFS
+  IFS=$' '
+  eval "plugins=($IDLEBOX_PLUGINS)"
+  IFS=$IFS_temp
 
   source $ZSH/oh-my-zsh.sh
 fi
