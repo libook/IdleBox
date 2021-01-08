@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+# Zero out all unused disk blocks.
+######
+
+sudo dd if=/dev/zero of=zero.tmp bs=10M; sudo rm -f zero.tmp
+
