@@ -10,6 +10,7 @@ export IDLEBOX=$HOME/.idlebox
 # Load config
 IFS_temp=$IFS
 IFS=$'\n'
+# Read config file and ignore comment lines and blank lines.
 for line in $(grep -v "^#" < $IDLEBOX'/config' | grep -v "^\s*$"); do
   eval 'export IDLEBOX_'$line
 done
