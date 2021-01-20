@@ -8,7 +8,7 @@ export IDLEBOX=$HOME/.idlebox
 # Load config
 IFS_temp=$IFS
 IFS=$'\n'
-for line in $(cat < $IDLEBOX'/config'); do
+for line in $(grep -v "^#" < $IDLEBOX'/config'); do
   eval 'export IDLEBOX_'$line
 done
 IFS=$IFS_temp
