@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+# Some devices won't shut down truly and batteries will keep running out.
+# This will force shutdown device.
+
+adb devices
+echo "The 1st device will be shuted down."
+echo "Press any key to continue or press Ctrl+C to exit."; read -k1 -s
+adb shell reboot -p
+
