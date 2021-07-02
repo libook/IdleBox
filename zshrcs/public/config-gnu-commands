@@ -4,14 +4,16 @@
 # Use GNU commands as default.
 # brew install coreutils findutils gnu-tar gnu-sed gawk gnutls gnu-indent gnu-getopt grep 
 
-for DIR in /usr/local/opt/*; do
-  COMMAND_DIR=$DIR/libexec
-  if [ -d "$COMMAND_DIR/gnubin" ]; then
-    # Use these commands with their normal names, add a "gnubin" directory to PATH.
-    export PATH="$COMMAND_DIR/gnubin:$PATH"
-  fi
-  if [ -d "$COMMAND_DIR/gnuman" ]; then
-    # Access their man pages with normal names, add the "gnuman" directory MANPATH.
-    export MANPATH="$COMMAND_DIR/gnuman:$MANPATH"
-  fi
-done
+if [ -d "/usr/local/opt/" ]; then
+  for DIR in /usr/local/opt/*; do
+    COMMAND_DIR=$DIR/libexec
+    if [ -d "$COMMAND_DIR/gnubin" ]; then
+      # Use these commands with their normal names, add a "gnubin" directory to PATH.
+      export PATH="$COMMAND_DIR/gnubin:$PATH"
+    fi
+    if [ -d "$COMMAND_DIR/gnuman" ]; then
+      # Access their man pages with normal names, add the "gnuman" directory MANPATH.
+      export MANPATH="$COMMAND_DIR/gnuman:$MANPATH"
+    fi
+  done
+fi
