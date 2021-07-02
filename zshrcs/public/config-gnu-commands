@@ -2,7 +2,7 @@
 
 # For Mac OS.
 # Use GNU commands as default.
-# brew install coreutils findutils gnu-tar gnu-sed gawk gnutls gnu-indent gnu-getopt grep 
+# brew install coreutils findutils gnu-tar gnu-sed gawk gnutls gnu-indent gnu-getopt grep
 
 if [ -d "/usr/local/opt/" ]; then
   for DIR in /usr/local/opt/*; do
