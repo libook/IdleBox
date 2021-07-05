@@ -6,11 +6,9 @@
 ######
 
 
-# Define tmp directory name:
-TMP_DIRECTORY='/tmp/export-docx-images-'`random`
-
 # Create tmp directory:
-mkdir $TMP_DIRECTORY
+TMP_DIRECTORY="$(mktemp -d)"
+echo "Use directory: $TMP_DIRECTORY"
 
 FILE_NAME=`echo $1 |awk -F '/' '{print $NF}'|sed -e 's/\..*$//'`
 
