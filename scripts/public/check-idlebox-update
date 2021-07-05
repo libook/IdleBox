@@ -2,7 +2,7 @@
 
 # This will check for update everyday.
 
-LOCK_PATH=/tmp/idlebox-update.lock
+LOCK_PATH=$TMPDIR/idlebox-update.lock
 DATE=`date +%Y%m%d`
 
 writeLock(){
