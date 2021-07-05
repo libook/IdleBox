@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+# Reference: https://pubs.opengroup.org/onlinepubs/9699919799/
+
+# $TMPDIR
+if [[ -z $TMPDIR ]]; then
+  if [[ -n $(mktemp) ]]; then
+    TMPDIR="$(dirname $(mktemp -u))"
+  else
+    TMPDIR="/tmp"
+  fi
+fi
