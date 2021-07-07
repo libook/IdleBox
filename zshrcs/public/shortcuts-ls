@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+# Colorful ls
+alias ls="ls --color=always"
+
