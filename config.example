@@ -5,15 +5,8 @@
 
 # --------------------
 
-# Don't edit the path unless you know what you are doing.
-ZSHRCS_PATH="$IDLEBOX/zshrcs"
-
 # e.g. "$HOME/Library/Android/sdk/build-tools/29.0.2/"
 ANDROID_PLATFORM_TOOLS_DIR=
-
-# Enable search function of Homebrew.
-# Checkout https://docs.brew.sh/Manpage#environment
-HOMEBREW_GITHUB_API_TOKEN=
 
 # Ruby executable directory path from RubyGems.
 GEM_BIN_DIR=
@@ -23,22 +16,21 @@ GEM_BIN_DIR=
 # This is also used by declaring executable directory path.
 GO_DIR=
 
-# Directory path for "cargo" command of Rust;
-# which containing bin, env, git, registry, etc.
-# This is also used by declaring executable directory path.
-RUST_DIR=
-
-# For MacOS, make "nw" command work.
-# e.g. "/Applications/nwjs.app/Contents/MacOS/nwjs"
-NWJS=
-
 # Directory path for registering Google Cloud SDK commands.
 GOOGLE_CLOUD_SDK_DIR=
+
+# Enable search function of Homebrew.
+# Checkout https://docs.brew.sh/Manpage#environment
+HOMEBREW_GITHUB_API_TOKEN=
 
 # Set main locale of shell.
 # Make sure you have generated the locale before setting this.
 # Checkout https://wiki.archlinux.org/index.php/locale
 LANGUAGE_AND_ENCODING="en_US.UTF-8"
+
+# For MacOS, make "nw" command work.
+# e.g. "/Applications/nwjs.app/Contents/MacOS/nwjs"
+NWJS=
 
 # Plugins for zsh.
 # Make sure you have installed the plugin into Oh-my-zsh.
@@ -46,6 +38,11 @@ LANGUAGE_AND_ENCODING="en_US.UTF-8"
 # Multiple values in a space separated list.
 # e.g. "git zsh-completions zsh-syntax-highlighting"
 PLUGINS="git"
+
+# Directory path for "cargo" command of Rust;
+# which containing bin, env, git, registry, etc.
+# This is also used by declaring executable directory path.
+RUST_DIR=
 
 # Set shell proxy addresses for shell-proxy command.
 # Checkout https://wiki.archlinux.org/index.php/Proxy_server
@@ -57,3 +54,6 @@ SHELL_PROXY_SERVER_HTTPS=
 # Make sure you have installed the theme into Oh-my-zsh.
 # Checkout https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 THEME="aussiegeek"
+
+# Don't edit the path unless you know what you are doing.
+ZSHRCS_PATH="$IDLEBOX/zshrcs"
