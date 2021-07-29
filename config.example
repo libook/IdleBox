@@ -28,6 +28,11 @@ HOMEBREW_GITHUB_API_TOKEN=
 # Checkout https://wiki.archlinux.org/index.php/locale
 LANGUAGE_AND_ENCODING="en_US.UTF-8"
 
+# Versions of Node.js .
+# Multiple values in an ZSH array.
+# e.g. ('v16' 'v14')
+NODE_VERSIONS=()
+
 # For MacOS, make "nw" command work.
 # e.g. "/Applications/nwjs.app/Contents/MacOS/nwjs"
 NWJS=

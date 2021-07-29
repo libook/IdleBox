@@ -7,20 +7,40 @@ else
   # Folder path of nvm scripts.
   SCRIPT_PATH=$IDLEBOX/scripts/public/nvm-scripts
 
-  # Update lts.
-  $SCRIPT_PATH/update-one "lts/*" current
+  echo "Checking for Node.js versions at $IDLEBOX_NODE_VERSIONS"
 
-  nvm use "lts/*"
-  nvm alias default "lts/*"
-  # Uninstall all versions except lts.
-  nvm ls | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" | grep -v '\->' | xargs -I VERSION $SCRIPT_PATH/uninstall-one VERSION
+  for VERSION in $IDLEBOX_NODE_VERSIONS; do
+    echo "Checking version $VERSION"
 
-  # Install latest.
-  $SCRIPT_PATH/update-one node "lts/*"
+    # Check new version.
+    unset NEW_VERSION
+    NEW_VERSION=$(nvm ls-remote "$VERSION" | grep -P 'v[0-9\.]+' -o | tail -n 1)
 
-  # Use latest.
-  nvm use node
+    if [ -n "$NEW_VERSION" ]; then
+      echo "New version is $NEW_VERSION"
 
-  nvm alias default node
+      # Get Installed version.
+      unset OLD_VERSION
+      OLD_VERSION=$(nvm ls "$VERSION" | grep -P 'v[0-9\.]+' -o | tail -n 1)
+      echo "Old version is $OLD_VERSION"
+
+      if [ "$NEW_VERSION" != "$OLD_VERSION" ]; then
+        echo "Update from $OLD_VERSION to $NEW_VERSION"
+
+        # Install new version.
+        $SCRIPT_PATH/update-one "$NEW_VERSION" "$OLD_VERSION"
+
+        nvm use "$NEW_VERSION"
+
+        # Uninstall old version.
+        $SCRIPT_PATH/uninstall-one "$OLD_VERSION"
+      fi
+    fi
+  done
+
   . "$NVM_DIR/nvm.sh"
+
+  # Use first version as default.
+  nvm alias default "${IDLEBOX_NODE_VERSIONS[1]}"
+  nvm ls
 fi
