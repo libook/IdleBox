@@ -1,11 +1,8 @@
 #!/usr/bin/env zsh
 
-echo "DEPRECATED! random will be removed in the future. Please use mktemp instead."
-
 # Generate a random string with a length. e.g. `random 10`
 ######
 
 LENGTH=${1:=6}
 
 head /dev/urandom | tr -dc A-Za-z0-9 | head -c $LENGTH; echo ''
-
