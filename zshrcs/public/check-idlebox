@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+
+# Check whether $HOME/.zshrc is a symbolic link
+if [ ! -L "$HOME/.zshrc" ] && [[ "$(readlink $HOME/.zshrc)" != "$IDLEBOX/zshrc" ]]; then
+  echo "################################## WARNING ####################################"
+  echo ""
+  echo "\$HOME/.zshrc is NOT a symbolic link to $IDLEBOX/.zshrc"
+  echo "IdleBox will not work as expected!"
+  echo "It probably happens if any installation want to append their initialization"
+  echo " into \$HOME/.zshrc ."
+  echo "Please backup \$HOME/.zshrc and run:"
+  echo "$ ln -s $IDLEBOX/zshrc \$HOME/.zshrc"
+  echo "Then create new file in $IDLEBOX/scripts/private for new initialization."
+  echo ""
+  echo "###############################################################################"
+fi
