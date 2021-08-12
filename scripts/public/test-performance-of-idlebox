@@ -1,9 +1,29 @@
 #!/usr/bin/env zsh
 
-echo "ms\tPath"
+echo "Shell load time:"
+time $SHELL -i -c exit
+echo ""
+
+echo "zshrcs load time in milliseconds:"
+echo "Time\tPath"
 for f in $IDLEBOX_ZSHRCS_PATH/*/*; do
     time_start=$(perl -MTime::HiRes -e 'printf("%.0f\n",Time::HiRes::time()*1000)')
     source $f
     time_end=$(perl -MTime::HiRes -e 'printf("%.0f\n",Time::HiRes::time()*1000)')
     echo "$(expr $time_end - $time_start)\t$f"
 done
+echo ""
+
+echo "Plugins load time in milliseconds:"
+echo "Time\tPlugin"
+for plugin in $plugins; do
+  time_start=$(perl -MTime::HiRes -e 'printf("%.0f\n",Time::HiRes::time()*1000)')
+  if [ -f $ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh ]; then
+    source $ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh
+  elif [ -f $ZSH/plugins/$plugin/$plugin.plugin.zsh ]; then
+    source $ZSH/plugins/$plugin/$plugin.plugin.zsh
+  fi
+  time_end=$(perl -MTime::HiRes -e 'printf("%.0f\n",Time::HiRes::time()*1000)')
+  echo "$(expr $time_end - $time_start)\t$plugin"
+done
+echo ""
