@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+echo "ms\tPath"
+for f in $IDLEBOX_ZSHRCS_PATH/*/*; do
+    time_start=$(perl -MTime::HiRes -e 'printf("%.0f\n",Time::HiRes::time()*1000)')
+    source $f
+    time_end=$(perl -MTime::HiRes -e 'printf("%.0f\n",Time::HiRes::time()*1000)')
+    echo "$(expr $time_end - $time_start)\t$f"
+done
