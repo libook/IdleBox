@@ -27,3 +27,9 @@ for plugin in $plugins; do
   echo "$(expr $time_end - $time_start)\t$plugin"
 done
 echo ""
+
+echo "Zprof:"
+zmodload zsh/zprof
+source $HOME/.zshrc
+zprof
+echo ""
