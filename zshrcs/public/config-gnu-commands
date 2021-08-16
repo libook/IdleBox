@@ -15,5 +15,6 @@ if [ -d "/usr/local/opt/" ]; then
       # Access their man pages with normal names, add the "gnuman" directory MANPATH.
       export MANPATH="$COMMAND_DIR/gnuman:$MANPATH"
     fi
+    unset COMMAND_DIR
   done
 fi
