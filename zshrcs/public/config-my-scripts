@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 
-# Scripts of mine
-export PATH=$PATH:$IDLEBOX/scripts/public
+# Scripts in $IDLEBOX/scripts/ .
+# For same name scripts, private scripts have higher priority.
 export PATH=$PATH:$IDLEBOX/scripts/private
+export PATH=$PATH:$IDLEBOX/scripts/public
