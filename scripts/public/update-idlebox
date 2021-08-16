@@ -1,7 +1,29 @@
 #!/usr/bin/env zsh
 
 cd $IDLEBOX
-git pull
+
+# Make sure that there will be a new branch.
+git branch -D __temp > /dev/null 2>&1
+
+# Fetch new commits.
+git fetch origin master:__temp
+
+# Check if there is any breaking change.
+breaking_change_message=$(git log ..__temp --no-merges --oneline | grep "BREAKING CHANGE")
+if [ -n "$breaking_change_message" ]; then
+  echo $breaking_change_message
+  read "yn?Continue anyway? Input 'Yes' to do this. "
+  case $yn in
+    Yes* )
+      echo "Confirmed 'Yes'."
+      ;;
+    * )
+      echo "Not 'Yes'. Canceled."
+      exit
+      ;;
+  esac
+fi
+
+git merge __temp --no-edit
 
 source $HOME/.zshrc
-
