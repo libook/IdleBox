@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+echo "Updating IdleBox..."
+
 cd $IDLEBOX
 
 # Make sure that there will be a new branch.
@@ -11,6 +13,7 @@ git fetch origin master:__temp
 # Check if there is any breaking change.
 breaking_change_message=$(git log ..__temp --no-merges --oneline | grep "BREAKING CHANGE")
 if [ -n "$breaking_change_message" ]; then
+  echo "WARNING: There are breaking changes:"
   echo $breaking_change_message
   read "yn?Continue anyway? Input 'Yes' to do this. "
   case $yn in
