@@ -20,6 +20,7 @@ IFS=$IFS_temp
 # For same name scripts, private scripts have higher priority.
 PRIVATE_SCRIPT_NAMES=($(cd $IDLEBOX_ZSHRCS_PATH/private/ && find . -maxdepth 1 -type f))
 PUBLIC_SCRIPT_NAMES=($(cd $IDLEBOX_ZSHRCS_PATH/public/ && find . -maxdepth 1 -type f))
+# Load public scripts which doesn't have same name with private scripts:
 for public_script_name in $PUBLIC_SCRIPT_NAMES; do
   do_load_private_script=false
   for private_script_name in $PRIVATE_SCRIPT_NAMES; do
@@ -28,12 +29,13 @@ for public_script_name in $PUBLIC_SCRIPT_NAMES; do
       break
     fi
   done
-  if [[ $do_load_private_scrip == true ]]; then
-    source $IDLEBOX_ZSHRCS_PATH/private/$private_script_name
-  else
+  if [[ $do_load_private_scrip != true ]]; then
     source $IDLEBOX_ZSHRCS_PATH/public/$public_script_name
   fi
 done
+# Load all private scripts:
+source $IDLEBOX_ZSHRCS_PATH/private/*
+# Clear variables:
 unset do_load_private_script
 unset PRIVATE_SCRIPT_NAMES
 unset PUBLIC_SCRIPT_NAMES
