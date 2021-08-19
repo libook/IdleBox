@@ -34,7 +34,9 @@ for public_script_name in $PUBLIC_SCRIPT_NAMES; do
   fi
 done
 # Load all private scripts:
-source $IDLEBOX_ZSHRCS_PATH/private/*
+for private_script_name in $PRIVATE_SCRIPT_NAMES; do
+  source $IDLEBOX_ZSHRCS_PATH/private/$private_script_name
+done
 # Clear variables:
 unset do_load_private_script
 unset PRIVATE_SCRIPT_NAMES
