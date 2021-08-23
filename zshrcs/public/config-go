@@ -3,6 +3,6 @@
 # Bin of go
 
 if [[ ! -z $IDLEBOX_GO_DIR ]];then
-  export PATH=$PATH:$IDLEBOX_GO_DIR/bin
+  export PATH=$IDLEBOX_GO_DIR/bin:$PATH
   export GOPATH=$IDLEBOX_GO_DIR
 fi

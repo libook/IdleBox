@@ -3,5 +3,5 @@
 # GEM
 
 if [[ ! -z $IDLEBOX_GEM_BIN_DIR ]];then
-  export PATH=$PATH:$IDLEBOX_GEM_BIN_DIR
+  export PATH=$IDLEBOX_GEM_BIN_DIR:$PATH
 fi

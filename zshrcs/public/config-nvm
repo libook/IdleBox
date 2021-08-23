@@ -8,7 +8,7 @@ if [ -d "$HOME/.nvm" ]; then
     fi
 
     if [ -d "$NVM_DIR/current/bin" ]; then
-        export PATH=$PATH:$NVM_DIR/current/bin
+        export PATH=$NVM_DIR/current/bin:$PATH
     fi
 
     NODE_GLOBALS+=("node")

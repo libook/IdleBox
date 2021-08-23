@@ -2,5 +2,4 @@
 
 # Scripts in $IDLEBOX/scripts/ .
 # For same name scripts, private scripts have higher priority.
-export PATH=$PATH:$IDLEBOX/scripts/private
-export PATH=$PATH:$IDLEBOX/scripts/public
+export PATH=$IDLEBOX/scripts/private:$IDLEBOX/scripts/public:$PATH
