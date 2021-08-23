@@ -6,7 +6,7 @@ echo ""
 
 echo "zshrcs load time in milliseconds:"
 echo "Time\tPath"
-for f in $IDLEBOX_ZSHRCS_PATH/*/*; do
+for f in $IDLEBOX/zshrcs/*/*; do
     time_start=$(perl -MTime::HiRes -e 'printf("%.0f\n",Time::HiRes::time()*1000)')
     source $f
     time_end=$(perl -MTime::HiRes -e 'printf("%.0f\n",Time::HiRes::time()*1000)')

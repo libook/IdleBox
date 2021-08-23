@@ -59,6 +59,3 @@ SHELL_PROXY_SERVER_HTTPS=
 # Make sure you have installed the theme into Oh-my-zsh.
 # Checkout https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 THEME="aussiegeek"
-
-# Don't edit the path unless you know what you are doing.
-ZSHRCS_PATH="$IDLEBOX/zshrcs"
