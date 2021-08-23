@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+source $IDLEBOX/zshrcs/public/shell-reload
+
 echo "Updating IdleBox..."
 
 cd $IDLEBOX
@@ -29,4 +31,4 @@ fi
 
 git merge __temp --no-edit
 
-source $IDLEBOX/zshrc
+shell-reload
