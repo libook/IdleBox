@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+# k8s-pull-config-images docker.mirrors.ustc.edu.cn
+
+for i in $(kubeadm config images list); do
+  imageName=${i#k8s.gcr.io/}
+  docker pull "$1/$imageName"
+  docker tag "$1/$imageName k8s.gcr.io/$imageName"
+  docker rmi "$1/$imageName"
+done;
