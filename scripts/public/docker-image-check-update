@@ -5,7 +5,6 @@
 
 # registry/organization/image:tag
 IMAGE="$1"
-COMMAND="$2"
 
 # find the number of slashes since registry name and organization are not required for images in docker.io
 slashes=$(echo "$IMAGE" | awk -F"/" '{print NF-1}')
@@ -117,8 +116,7 @@ echo "remote_digest: $digest"
 echo
 
 if [[ "$digest" != "$local_digest" ]]; then
-  echo "Update available. Executing update command..."
-  ($COMMAND)
+  echo "Update available."
 else
-  echo "Already up to date. Nothing to do."
+  echo "Already up to date."
 fi
