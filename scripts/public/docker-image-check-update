@@ -2,7 +2,6 @@
 
 # Check if the image ID local is the same as remote.
 # docker-image-check-updated registry/organization/image:tag
-# No output if it is already updated.
 
 # registry/organization/image:tag
 IMAGE="$1"
