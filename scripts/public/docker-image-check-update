@@ -1,0 +1,124 @@
+#!/usr/bin/env zsh
+
+# Check if the image ID local is the same as remote.
+# docker-image-check-updated registry/organization/image:tag
+
+# registry/organization/image:tag
+IMAGE="$1"
+COMMAND="$2"
+
+# find the number of slashes since registry name and organization are not required for images in docker.io
+slashes=$(echo "$IMAGE" | awk -F"/" '{print NF-1}')
+# echo "slashes: ${slashes}"
+
+registry="docker.io"
+organization="library"
+tag="latest"
+
+if [[ "$slashes" != "0" ]]; then
+  # registry/organization/image:tag or
+  # registry/image:tag or
+  # organization/image:tag
+
+  # Test if the first part is a domain.
+  string_to_test=$(echo "$IMAGE" | cut -d / -f 1)
+  # echo "string_to_test: ${string_to_test}"
+  ip_number=$(dig +short "${string_to_test}" | wc -l)
+  # echo "ip_number: ${ip_number}"
+  if [[ "$ip_number" != "0" ]]; then
+    # registry/organization/image:tag or
+    # registry/image:tag
+    registry=$string_to_test
+    string_without_reg=$(echo "${IMAGE}" | sed "s/${string_to_test}\///g")
+  else
+    # organization/image:tag
+    string_without_reg=$IMAGE
+  fi
+  # echo "string_without_reg: ${string_without_reg}"
+
+  slashes_without_reg=$(echo "$string_without_reg" | awk -F"/" '{print NF-1}')
+  # echo "slashes_without_reg: ${slashes_without_reg}"
+  if [[ "$slashes_without_reg" != "0" ]]; then
+    # organization/image:tag
+    organization=$(echo "$string_without_reg" | cut -d / -f 1)
+    string_without_reg_org=$(echo "$string_without_reg" | cut -d / -f 2)
+  else
+    # image:tag
+    string_without_reg_org=$string_without_reg
+  fi
+else
+  # image:tag
+  string_without_reg_org=$IMAGE
+fi
+# echo "string_without_reg: ${string_without_reg}"
+# echo "string_without_reg_org: ${string_without_reg_org}"
+
+colon_number=$(echo "$string_without_reg_org" | awk -F":" '{print NF-1}')
+# echo "colon_number: ${colon_number}"
+if [[ "$colon_number" != "0" ]]; then
+  # image:tag
+  image=$(echo "$string_without_reg_org" | cut -d ":" -f 1)
+  tag=$(echo "$string_without_reg_org" | cut -d ":" -f 2)
+else
+  # image
+  image=$string_without_reg_org
+fi
+
+echo
+echo "    registry: $registry"
+echo "organization: $organization"
+echo "       image: $image"
+echo "         tag: $tag"
+echo
+
+echo "Fetching local digest...  "
+local_digest=$(docker images -q --no-trunc "$IMAGE")
+# echo "Length of local_digest: $(echo $local_digest | wc -l)"
+if [[ "$(echo $local_digest | wc -l)" != "1" ]]; then
+  echo "Error: There are multiple tags of this image in local."
+  exit 1
+fi
+
+if [[ "$registry" == "docker.io" ]]; then
+  apidomain="registry-1.docker.io"
+
+  # Request: https://registry-1.docker.io/v2/
+  authdomsvc=$(curl --head "https://${apidomain}/v2/" 2>&1 | grep realm | cut -f2- -d "=" | tr "," "?" | tr -d '"' | tr -d "\r")
+  # echo "authdomsvc: ${authdomsvc}"
+
+  # Set the scope to look for our image
+  authscope="repository:${organization}/${image}:pull"
+
+  echo "Fetching Docker Hub token..."
+  token=$(curl --silent "${authdomsvc}&scope=${authscope}" | jq -r '.token')
+  # echo "$token"
+
+  org_slash="${organization}/"
+else
+  apidomain="${registry}"
+fi
+# echo "apidomain: ${apidomain}"
+
+# Grab the docker image digest from the Docker-Content-Digest: that is in the http header
+# Use “Accept: application/vnd.docker.distribution.manifest.v2+json” in order to get the version 2 schema
+echo "Fetching remote digest... "
+digest=$(
+  curl \
+    --silent \
+    -H "Accept: application/vnd.docker.distribution.manifest.v2+json" \
+    -H "Authorization: Bearer $token" \
+    "https://${apidomain}/v2/${org_slash}${image}/manifests/${tag}" |
+    jq -r '.config.digest'
+)
+
+echo
+echo " local_digest: $local_digest"
+echo "remote_digest: $digest"
+echo
+
+if [[ "$digest" != "$local_digest" ]]; then
+  echo "Update available. Executing update command..."
+  ($COMMAND)
+else
+  echo "Already up to date. Nothing to do."
+fi
