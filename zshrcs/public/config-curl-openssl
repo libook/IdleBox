@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+# For Mac OS.
+# Use curl with OpenSSL.
+# brew install curl-openssl
+
+if [ -d "/usr/local/opt/curl/" ]; then
+  export PATH="/usr/local/opt/curl/bin:$PATH"
+  export LDFLAGS="-L/usr/local/opt/curl/lib"
+  export CPPFLAGS="-I/usr/local/opt/curl/include"
+  export PKG_CONFIG_PATH="/usr/local/opt/curl/lib/pkgconfig"
+fi
