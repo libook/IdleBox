@@ -116,7 +116,7 @@ echo "remote_digest: $digest"
 echo
 
 if [[ "$digest" != "$local_digest" ]]; then
-  echo "Update available."
+  echo "${IMAGE} Update available."
 else
-  echo "Already up to date."
+  echo "${IMAGE} Already up to date."
 fi
