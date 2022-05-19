@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+# Flatten a container to an image (merge layers into one).
+
+# $1: container name
+# $2: new tag
+# Example: docker export nginx | docker import - nginx:latest
+docker export $1 | docker import - $2
+
