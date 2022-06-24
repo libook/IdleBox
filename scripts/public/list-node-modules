@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+find $1 -name "node_modules" -type d -prune -print
+
