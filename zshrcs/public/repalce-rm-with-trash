@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+if [[ ! -z "$(command -v trash)" ]];then
+    alias rm="echo Use 'trash', or the full path i.e. '/bin/rm'"
+fi
+
