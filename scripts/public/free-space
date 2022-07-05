@@ -1,0 +1,56 @@
+#!/usr/bin/env zsh
+
+# git gc
+echo "Compressing Git repositories..."
+cd $IDLEBOX
+git gc --aggressive
+cd $ZSH
+git gc --aggressive
+
+# - System package manager cache
+echo "Cleaning system package manager cache..."
+# -- MacOS
+if command -v "brew" >/dev/null; then
+  brew cleanup
+# -- Linux
+# --- Arch based
+elif command -v "yay" >/dev/null; then
+  yay -Sc
+elif command -v "pacman" >/dev/null; then
+  sudo pacman -Sc
+# --- Debian based
+elif command -v "apt" >/dev/null; then
+  sudo apt clean
+elif command -v "apt-get" >/dev/null; then
+  sudo apt-get clean
+# --- Red Hat based
+elif command -v "dnf" >/dev/null; then
+  sudo dnf clean all
+elif command -v "yum" >/dev/null; then
+  sudo yum clean all
+fi
+
+# nvm
+if [[ ! -z $NVM_DIR  ]]; then
+  echo "Cleaning nvm cache..."
+  nvm cache clear
+fi
+
+# npm
+if command -v "npm" >/dev/null; then
+  echo "Cleaning npm cache..."
+  npm cache clear --force
+fi
+
+# go
+if command -v "go" >/dev/null; then
+  echo "Cleaning go cache..."
+  go clean -modcache
+fi
+
+# Cargo
+# Install cargo-cache with: cargo install cargo-cache
+if [[ ! -z $IDLEBOX_RUST_DIR/bin/cargo-cache  ]]; then
+  echo "Cleaning cargo cache..."
+  cargo cache --autoclean-expensive
+fi
