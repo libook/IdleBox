@@ -35,5 +35,5 @@ function shell-proxy(){
     echo "Invalid param. Please input 'shell-proxy on' or 'shell-proxy off' to switch shell proxy."
   fi
 
-  curl -s http://checkip.dyndns.com/ | awk '{print $6}' | awk -F "<" '{print $1}'
+  curl http://www.cip.cc/`curl -s curl ifconfig.me`
 }

@@ -20,5 +20,5 @@ else
 fi
 
 # IP on internet
-curl -s http://checkip.dyndns.com/ | awk '{print $6}' | awk -F "<" '{print $1}'
+echo "`curl -s ifconfig.me`\t# Make sure you are NOT using a proxy."
 
