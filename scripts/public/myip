@@ -20,5 +20,5 @@ else
 fi
 
 # IP on internet
-curl http://checkip.dyndns.com/ | awk '{print $6}' | awk -F "<" '{print $1}'
+curl -s http://checkip.dyndns.com/ | awk '{print $6}' | awk -F "<" '{print $1}'
 
