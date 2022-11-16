@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+# Make dir for each branches of mergerfs
+# mergerfs-mkdir /smomedir1/somedir2
+
+branchString=$(ps -ef | grep mergerfs | grep -v grep | awk '{print $12}' | awk -F , '{print $2}' | awk -F '=' '{print $2}')
+branchArray=("${(@s/:/)branchString}")
+for i in $branchArray; do
+    mkdir -v -p $i$1
+done
+
