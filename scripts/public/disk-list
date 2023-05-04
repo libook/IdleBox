@@ -1,57 +1,53 @@
 #!/usr/bin/env zsh
 
-main() {
-    echo -e "DEVICE\tSN\tUUID\tMOUNTPOINT"
+echo -e "DEVICE\tSN\tUUID\tMOUNTPOINT"
 
-    # Get names of all devices
-    devices=("${(f)$(lsblk -d -o NAME -n)}")
+# Get names of all devices
+devices=("${(f)$(lsblk -d -o NAME -n)}")
 
-    # Output device name、SN、UUID and mountpoint of all devices
-    for dev in $devices
-    do
-        # Getting SN
-        sn=$(udevadm info --query=property --name="/dev/$dev" | grep SERIAL_SHORT | cut -d= -f2)
+# Output device name、SN、UUID and mountpoint of all devices
+for dev in $devices
+do
+    # Getting SN
+    sn=$(udevadm info --query=property --name="/dev/$dev" | grep SERIAL_SHORT | cut -d= -f2)
 
-        # Record it as N/A if there is no SN
-        if [ -z "$sn" ]; then
-            sn="N/A"
-        fi
+    # Record it as N/A if there is no SN
+    if [ -z "$sn" ]; then
+        sn="N/A"
+    fi
 
-        # Getting UUID
-        uuid=$(blkid -s UUID -o value "/dev/$dev")
+    # Getting UUID
+    uuid=$(blkid -s UUID -o value "/dev/$dev")
 
-        # Record it as N/A if there is no UUID
-        if [ -z "$uuid" ]; then
-            uuid="N/A"
-        fi
+    # Record it as N/A if there is no UUID
+    if [ -z "$uuid" ]; then
+        uuid="N/A"
+    fi
 
-        # lsblk support MOUNTPOINTS after v2.37
-        local lsblk_version=$(lsblk --version | awk '{print $4}')
-        if [[ "$(echo -e "${lsblk_version}\n2.37" | sort -V | tail -n 1)" == "${lsblk_version}" ]]; then
-          # Getting partition information
-          partitions=$(lsblk -l -o MOUNTPOINTS -n "/dev/$dev" | grep -v "^$" | tr "\n" "," | sed 's/,$//')
-        else
-          # Getting partition information
-          partitions=$(lsblk -l -o MOUNTPOINT -n "/dev/$dev" | grep -v "^$" | tr "\n" "," | sed 's/,$//')
-        fi
+    # lsblk support MOUNTPOINTS after v2.37
+    local lsblk_version=$(lsblk --version | awk '{print $4}')
+    if [[ "$(echo -e "${lsblk_version}\n2.37" | sort -V | tail -n 1)" == "${lsblk_version}" ]]; then
+      # Getting partition information
+      partitions=$(lsblk -l -o MOUNTPOINTS -n "/dev/$dev" | grep -v "^$" | tr "\n" "," | sed 's/,$//')
+    else
+      # Getting partition information
+      partitions=$(lsblk -l -o MOUNTPOINT -n "/dev/$dev" | grep -v "^$" | tr "\n" "," | sed 's/,$//')
+    fi
 
-        # Use lsblk to get mountpoint if there is no partition
-        if [ -z "$partitions" ]; then
-            mountpoint=$(lsblk -o MOUNTPOINT -n "/dev/$dev")
+    # Use lsblk to get mountpoint if there is no partition
+    if [ -z "$partitions" ]; then
+        mountpoint=$(lsblk -o MOUNTPOINT -n "/dev/$dev")
 
-        else
-            # If the device has partitions, output the mount points of all partitions in comma splits
-            mountpoint=$partitions
-        fi
+    else
+        # If the device has partitions, output the mount points of all partitions in comma splits
+        mountpoint=$partitions
+    fi
 
-        # Record it as N/A if there is no mountpoint
-        if [ -z "$mountpoint" ]; then
-            mountpoint="N/A"
-        fi
+    # Record it as N/A if there is no mountpoint
+    if [ -z "$mountpoint" ]; then
+        mountpoint="N/A"
+    fi
 
-        # Output device name, SN, UUID and mountpoint
-        echo -e "$dev\t$sn\t$uuid\t$mountpoint"
-    done
-}
-
-main | column -t -s $'\t'
+    # Output device name, SN, UUID and mountpoint
+    echo -e "$dev\t$sn\t$uuid\t$mountpoint"
+done
