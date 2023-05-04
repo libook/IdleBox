@@ -25,8 +25,15 @@ main() {
             uuid="N/A"
         fi
 
-        # Getting partition information
-        partitions=$(lsblk -l -o MOUNTPOINTS -n "/dev/$dev" | grep -v "^$" | tr "\n" "," | sed 's/,$//')
+        # lsblk support MOUNTPOINTS after v2.37
+        local lsblk_version=$(lsblk --version | awk '{print $2}')
+        if [[ "$(echo -e "${lsblk_version}\n2.37" | sort -V | tail -n 1)" == "${lsblk_version}" ]]; then
+          # Getting partition information
+          partitions=$(lsblk -l -o MOUNTPOINTS -n "/dev/$dev" | grep -v "^$" | tr "\n" "," | sed 's/,$//')
+        else
+          # Getting partition information
+          partitions=$(lsblk -l -o MOUNTPOINT -n "/dev/$dev" | grep -v "^$" | tr "\n" "," | sed 's/,$//')
+        fi
 
         # Use lsblk to get mountpoint if there is no partition
         if [ -z "$partitions" ]; then
