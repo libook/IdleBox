@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+# Bin of local
+
+export PATH=~/.local/bin:$PATH
+
