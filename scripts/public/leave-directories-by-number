@@ -1,0 +1,76 @@
+#!/usr/bin/env zsh
+
+# Deletes items under a given path and keeps a given number of items.
+# The list of items will be sorted in ascending order, with priority given to deleting the top items.
+# Can be used to delete old backups, if the backup file or directory is named in time.
+# e.g.
+#     ls /tmp/test
+#       2023-08  2023-09  2023-10  2023-11  2023-12
+#     leave-directories-by-number "/tmp/test" 2
+#       The following item will be deleted:
+#       2023-08 2023-09 2023-10
+#       Are you sure? (y/n) y
+#       rm -rf /tmp/test/2023-08
+#       rm -rf /tmp/test/2023-09
+#       rm -rf /tmp/test/2023-10
+
+# Check parameters
+if [ $# -lt 2 ]; then
+  echo "Usage: $0 <path> <number> [-y]"
+  exit 1
+fi
+
+# Init parameters
+the_path=$1
+number=$2
+confirm=$3
+
+# Check whether path exists
+if [ ! -d $the_path ]; then
+  echo "Path $the_path does not exist"
+  exit 2
+fi
+
+# Check whether nothing under the path
+if [ ! "$(ls -A $the_path)" ]; then
+  echo "Path $the_path is empty"
+  exit 0
+fi
+
+# Check whether item number is enough
+item_count=$(find $the_path -maxdepth 1 | wc -l)
+item_count=$((item_count-1)) # exclude current directory
+if [ $item_count -le $number ]; then
+  echo "Path $the_path has less than or equal to $number items"
+  exit 0
+fi
+
+# Sort items and get the first few
+item_list=$(find $the_path -mindepth 1 -maxdepth 1 | sort | head -n -$number)
+item_list=${item_list//$the_path\//} # remove path prefix
+item_list=("${(f)item_list}") # split into array
+
+# List the names of the items to be deleted and ask the user for confirmation
+echo "The following item will be deleted:"
+echo $item_list
+
+if [ "$confirm" != "-y" ]; then # require user's confirming if no "-y"
+  echo -n "Are you sure? (y/n) "
+  read answer
+  if [ "$answer" != "y" ]; then # exit if the user does not confirm
+    echo "Operation cancelled"
+    exit 0
+  fi
+fi
+
+# Execute the delete operation and display the result
+for item in $item_list; do # iterate through the list of items to be deleted
+  echo "rm -rf $the_path/$item"
+  rm -rf $the_path/$item # deleting items and their contents
+  if [ $? -ne 0 ]; then # displays an error message if the deletion fails and proceeds to delete the next item
+    echo "Failed to delete $item"
+    continue
+  fi
+done
+
+echo "Done"
