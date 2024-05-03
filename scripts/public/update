@@ -16,6 +16,8 @@ if command -v "brew" >/dev/null; then
 # -- Linux
 # --- Arch based
 elif command -v "yay" >/dev/null; then
+  paru
+elif command -v "yay" >/dev/null; then
   yay
 elif command -v "pacman" >/dev/null; then
   sudo pacman -Syu
