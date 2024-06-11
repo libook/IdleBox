@@ -15,7 +15,7 @@ if command -v "brew" >/dev/null; then
   brew update && brew upgrade && brew upgrade --cask --greedy
 # -- Linux
 # --- Arch based
-elif command -v "yay" >/dev/null; then
+elif command -v "paru" >/dev/null; then
   paru
 elif command -v "yay" >/dev/null; then
   yay
