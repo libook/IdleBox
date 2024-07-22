@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+
+# Need OpenBSD version netcat.
+
+if [[ -z "$ALL_PROXY" ]]; then
+    echo "Error: ALL_PROXY variable is not set."
+    exit 1
+fi
+
+IP_PORT="${ALL_PROXY#*://}"
+
+ssh -o ProxyCommand='nc -X 5 -x '$IP_PORT' %h %p' $@
+
