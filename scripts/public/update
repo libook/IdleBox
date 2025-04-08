@@ -31,6 +31,9 @@ elif command -v "dnf" >/dev/null; then
   sudo dnf update
 elif command -v "yum" >/dev/null; then
   sudo yum update
+# --- Termux
+elif command -v "yum" >/dev/null; then
+  pkg update && pkg upgrade
 fi
 
 # - Node.js
