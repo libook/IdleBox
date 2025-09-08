@@ -16,9 +16,9 @@ if [ -d "$HOME/.nvm" ]; then
 
     load_nvm () {
         # Mirrors of nvm
-        export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node
-        export NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node
-        export NVM_IOJS_ORG_MIRROR=https://npm.taobao.org/mirrors/iojs
+        export NVM_NODEJS_ORG_MIRROR=https://npmmirror.com/mirrors/node
+        export NODEJS_ORG_MIRROR=https://npmmirror.com/mirrors/node
+        #export NVM_IOJS_ORG_MIRROR=
 
         # Let NVM create ~/.nvm/current as a soft link to current node version.
         NVM_SYMLINK_CURRENT=true
