@@ -36,16 +36,12 @@ elif command -v "yum" >/dev/null; then
   sudo yum update
 fi
 
-# - Node.js
-if [[ ! -z $NVM_DIR  ]]; then
-  echo "Updating Node.js..."
-  update-node
-fi
-
-# - Rust
-if command -v "rustup" >/dev/null; then
-  echo "Updating Rust..."
-  update-rust
+# - mise
+if command -v "mise"; then
+  echo "Updating mise..."
+  mise self-update
+  echo "Updating mise tools..."
+  mise upgrade
 fi
 
 echo "Complete!"

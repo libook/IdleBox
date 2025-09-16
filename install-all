@@ -3,8 +3,8 @@
 # Download Oh My Zsh.
 git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
 
-# Download NVM.
-git clone https://github.com/nvm-sh/nvm.git $HOME/.nvm
+# Download mise.
+curl https://mise.run | sh
 
 # Install IdleBox.
 zsh -c "$(curl -fsSL https://raw.githubusercontent.com/libook/IdleBox/master/install)"
