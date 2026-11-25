@@ -25,11 +25,11 @@ for public_script_name in $PUBLIC_SCRIPT_NAMES; do
   do_load_private_script=false
   for private_script_name in $PRIVATE_SCRIPT_NAMES; do
     if [[ $public_script_name == $private_script_name ]]; then
-      do_load_private_scrip=true
+      do_load_private_script=true
       break
     fi
   done
-  if [[ $do_load_private_scrip != true ]]; then
+  if [[ $do_load_private_script != true ]]; then
     source $IDLEBOX/zshrcs/public/$public_script_name
   fi
 done
